@@ -1,0 +1,37 @@
+.categoryTitle {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+
+.card {
+    width: 80%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the card horizontally */
+  }
+  
+  .table {
+    width: 100%;
+  }
+  
+  .card-footer {
+    justify-content: space-between;
+  }
+  
+  .skipBtn,
+  .submitBtn {
+    width: 15%; /* Make the buttons the same width */
+  }
+  
+  @media (max-width: 767px) {
+    .card {
+      width: 100%; /* Make the card full-width on smaller screens */
+    }
+  
+    .skipBtn,
+    .submitBtn {
+      width: 100%; /* Make the buttons full-width on smaller screens */
+      margin-top: 10px; /* Add some margin to separate the buttons */
+    }
+  }
+  

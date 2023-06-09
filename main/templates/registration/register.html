@@ -1,0 +1,218 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'bs5/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'main/static/custom.css' %}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <!-- For Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet">
+	
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="{% static '/home-style.css/' %}" rel="stylesheet">
+    
+    <!-- CUSTOM Section CSS -->
+    <link href="{% static '/custom.css/' %}" rel="stylesheet">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static '/custom.js/' %}"></script>
+    
+    <title>Register Page</title>
+</head>
+<body>
+
+    <!-- Navbar Template -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="color: white;">
+      <div class="container">
+        <a style="color: honeydew;" class="navbar-brand" href="#">AFK <span style="color: #64bcf4;">Test</span> Prep</a> <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a style="color: honeydew;" class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a style="color: honeydew;" class="nav-link" href="{% url 'all_Category' %}">Take Test</a>
+            </li>
+            <li class="nav-item">
+              <a style="color: honeydew;" class="nav-link" href="#">Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a style="color: honeydew;" class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a style="color: honeydew;" class="nav-link" href="{% url 'result' %}">Result</a>
+            </li>          
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<section class="h-100" style="background-color: #2B4162;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card card-registration my-4">
+
+        <form method="POST">
+
+          {% csrf_token %}
+          <div class="row g-0">
+            <div class="col-xl-6 d-none d-xl-block">
+              <img src="{% static '/images/register.jpg' %}"
+                alt="Sample photo" class="img-fluid"
+                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+            </div>
+
+            <div class="col-xl-6">
+              <img src="{% static '/images/loginLogo.png' %}" style="height: 200px; position: absolute; ">
+              <div class="card-body p-md-5 text-black">
+                <h3 class="mb-3 text-uppercase" style="margin-top: 120px;">Registration form</h3>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                      <input type="{{ form.first_name.field.widget.input_type }}" 
+                      name="{{ form.first_name.html_name }}"
+                      id="{{ form.first_name.id_for_label }}"
+                      class="form-control"
+                      value="{{ form.first_name.value|default:'' }}"
+                      required>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                      <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                      <input type="{{ form.last_name.field.widget.input_type }}" 
+                      name="{{ form.last_name.html_name }}"
+                      id="{{ form.last_name.id_for_label }}"
+                      class="form-control"
+                      value="{{ form.last_name.value|default:'' }}"
+                      required>
+                    </div>
+                  </div>
+                </div>
+                
+                    <div class="form-outline mb-4">
+                      <label for="{{ form.username.id_for_label }}">Username</label>
+                      <input type="{{ form.username.field.widget.input_type }}" 
+                      name="{{ form.username.html_name }}"
+                      id="{{ form.username.id_for_label }}"
+                      class="form-control"
+                      value="{{ form.username.value|default:'' }}"
+                      required>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                      <label for="{{ form.email.id_for_label }}">Email</label>
+                      <input type="{{ form.email.field.widget.input_type }}" 
+                             name="{{ form.email.html_name }}"
+                             id="{{ form.email.id_for_label }}"
+                             class="form-control"
+                             value="{{ form.email.value|default:'' }}"
+                             onkeyup="checkFields()">
+                    </div>
+                    
+                    <div class="form-outline mb-4">
+                      <label for="{{ form.password1.id_for_label }}">Password</label>
+                      <div class="input-group">
+                        <input type="{{ form.password1.field.widget.input_type }}" 
+                               name="{{ form.password1.html_name }}"
+                               id="{{ form.password1.id_for_label }}"
+                               class="form-control"
+                               value="{{ form.password1.value|default:'' }}"
+                               onkeyup="checkFields()">
+                        <button class="btn btn-outline-secondary" type="button" id="toggle-password1">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <div class="form-outline mb-4">
+                      <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                      <div class="input-group">
+                        <input type="{{ form.password2.field.widget.input_type }}" 
+                               name="{{ form.password2.html_name }}"
+                               id="{{ form.password2.id_for_label }}"
+                               class="form-control"
+                               value="{{ form.password2.value|default:'' }}"
+                               onkeyup="checkFields()">
+                        <button class="btn btn-outline-secondary" type="button" id="toggle-password2">
+                          <i class="bi bi-eye"></i>
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group text-center">
+                      <button type="submit" class="btn btn-primary btn-block mt-4 mx-auto" style="width: 130px;" id="registerBtn" disabled>Register</button>
+                      <a href="{% url 'login' %}" class="btn btn-warning btn-block mt-4 mx-auto" style="width: 200px;">Already have account?</a>
+                    </div>
+
+              </div>
+            </div>
+            <button type="reset" class="btn btn-light btn-lg bg-dark text-white fw-bold text-uppercase">Reset all Inputs</button>
+          </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- This script is for the Checking of Email and Password fields are entered correctly -->
+<script>
+  function checkFields() {
+    var email = document.getElementById("{{ form.email.id_for_label }}").value;
+    var password1 = document.getElementById("{{ form.password1.id_for_label }}").value;
+    var password2 = document.getElementById("{{ form.password2.id_for_label }}").value;
+    var registerBtn = document.getElementById("registerBtn");
+    if (email.length > 0 && password1.length > 7 && password2.length > 7 && password1 == password2) {
+      registerBtn.disabled = false;
+    } else {
+      registerBtn.disabled = true;
+    }
+  }
+</script>
+
+<!-- This is for the Show/Hide Password -->
+<script>
+  const togglePassword1 = document.querySelector('#toggle-password1');
+  const togglePassword2 = document.querySelector('#toggle-password2');
+  const password1 = document.querySelector('#{{ form.password1.id_for_label }}');
+  const password2 = document.querySelector('#{{ form.password2.id_for_label }}');
+
+  togglePassword1.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+    password1.setAttribute('type', type);
+
+    // toggle the button icon
+    this.querySelector('i').classList.toggle('bi-eye');
+    this.querySelector('i').classList.toggle('bi-eye-slash');
+  });
+
+  togglePassword2.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+    password2.setAttribute('type', type);
+
+    // toggle the button icon
+    this.querySelector('i').classList.toggle('bi-eye');
+    this.querySelector('i').classList.toggle('bi-eye-slash');
+  });
+</script>
+
+
+</body>
+</html>
